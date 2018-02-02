@@ -83,7 +83,9 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
         if(firstClick) {
 
+            capacity.setEnabled(true);
             capacity.setFocusableInTouchMode(true);
+
             changeCapacityButton.setText("Save");
             firstClick=false;
         }else if(!firstClick){
@@ -92,10 +94,11 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
             mDatabase.child("Parking Lots").child(clickId).child("capacity").setValue(capacity.getText().toString());
             Log.i("second Click","Second Click");
             changeCapacityButton.setText("update capacity");
-            capacity.setFocusableInTouchMode(false);
-            firstClick=true;
-            Toast.makeText(getApplicationContext(),"Capacity of lot updated",Toast.LENGTH_LONG).show();
+            //capacity.setFocusableInTouchMode(false);
+            capacity.setEnabled(false);
 
+            Toast.makeText(getApplicationContext(),"Capacity of lot updated",Toast.LENGTH_LONG).show();
+            firstClick=true;
         }
     }
 
