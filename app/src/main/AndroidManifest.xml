@@ -25,7 +25,8 @@
         <activity android:name=".Requests" />
         <activity android:name=".Per_User_Action_Details" />
         <activity android:name=".Per_Parking_lot_Details" />
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignInActivity"></activity>
     </application>
 
 </manifest>

@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class New_lot extends AppCompatActivity {
     private EditText lotNameEditText;
     private EditText ownerNameEditText;
+    private EditText phoneNumberEditText;
     private EditText capacityEditText;
     private EditText latitudeEditText;
     private EditText longitudeEditText;
@@ -30,6 +31,7 @@ public class New_lot extends AppCompatActivity {
         capacityEditText=(EditText) findViewById(R.id.capacityEditText);
         latitudeEditText=(EditText) findViewById(R.id.latitudeEditText);
         longitudeEditText=(EditText) findViewById(R.id.longitudeEditText);
+        phoneNumberEditText=(EditText) findViewById(R.id.phoneNumberEditText);
     }
 
     public void addNewLot(View view){
@@ -50,7 +52,7 @@ public class New_lot extends AppCompatActivity {
             parkingLotDetails.setLot_id(id);
             
             parkingLotDetails=new Parking_Lot_Details(id,lotNameEditText.getText().toString(),ownerNameEditText.getText().toString(),
-                    capacityEditText.getText().toString());
+                    phoneNumberEditText.getText().toString(),capacityEditText.getText().toString());
 
             mDatabaseReference.child(id).setValue(parkingLotDetails);
 
@@ -58,6 +60,7 @@ public class New_lot extends AppCompatActivity {
             Double longitude=Double.parseDouble(longitudeEditText.getText().toString());
 
             parkingLotDetails.setLotName(lotNameEditText.getText().toString());
+            parkingLotDetails.setPhoneNumber(phoneNumberEditText.getText().toString());
             parkingLotDetails.geoLocation(longitude,latitude);
 
 
@@ -69,6 +72,8 @@ public class New_lot extends AppCompatActivity {
             capacityEditText.setText("");
             latitudeEditText.setText("");
             longitudeEditText.setText("");
+            phoneNumberEditText.setText("");
+
 
 
         }

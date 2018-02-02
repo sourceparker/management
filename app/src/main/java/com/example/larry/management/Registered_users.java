@@ -30,7 +30,7 @@ public class Registered_users extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registered_users);
+        setContentView( R.layout.activity_registered_users);
         registered_usersListView= findViewById(R.id.registered_usersListView);
 
 
@@ -111,16 +111,10 @@ public class Registered_users extends AppCompatActivity {
                     }//onCancelled
                 });
 
-                   // Intent intent = new Intent(Registered_users.this, Per_User_Action_Details.class);
-
-
-                  //  intent.putExtra("Click ID", keyHolder.get(i));
-
-
 
                     }
 
-                    //
+
                 }
             });
         };
