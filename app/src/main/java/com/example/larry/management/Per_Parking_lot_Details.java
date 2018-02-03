@@ -10,6 +10,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryDataEventListener;
+import com.firebase.geofire.GeoQueryEventListener;
+import com.firebase.geofire.LocationCallback;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +28,9 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
     private TextView lotName;
     private EditText capacity;
     private TextView ownerName;
+    private TextView coordinates;
     private TextView phoneNumber;
-    private Button changeCapacityButton;
+    private Button changeDetailsButton;
     private DatabaseReference mDatabase;
     private String clickId;
     boolean firstClick=true;
@@ -37,7 +44,8 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
         capacity=findViewById(R.id.capacityEditText);
         ownerName=findViewById(R.id.ownerTextView);
         phoneNumber=findViewById(R.id.phoneNumberTextView);
-        changeCapacityButton=findViewById(R.id.changeCapacityButton);
+        changeDetailsButton=findViewById(R.id.changeDetailsButton);
+        coordinates=findViewById(R.id.coordinatesEditText);
 
         Intent intent=getIntent();
         clickId=intent.getStringExtra("Click ID");
@@ -58,8 +66,10 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
                         phoneNumber.setText(parking_lot_details.getPhoneNumber());
                         lotName.setText(parking_lot_details.getLotName());
                         ownerName.setText(parking_lot_details.getOwnerName());
+      //                coordinates.setText(parking_lot_details.getLocation().toString());
 
                         //Retrieve coordinates
+                        retrieveCoordinates();
                     }
                 }
 
@@ -79,21 +89,61 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     }
 
-    public void updateCapacity(View view){
+    private void retrieveCoordinates() {
+
+        mDatabase= FirebaseDatabase.getInstance().getReference("Parking Lots").child(clickId);
+        //Log.i("TAG",clickId);
+        GeoFire geoFire= new GeoFire(mDatabase);
+        geoFire.getLocation("coordinates", new LocationCallback() {
+            @Override
+            public void onLocationResult(String key, GeoLocation location) {
+                if (location != null) {
+                    Log.i("TAG",String.format("The location for key %s is [%f,%f]", key, location.latitude, location.longitude));
+                } else {
+                    Log.i("TAG",String.format("There is no location for key %s in GeoFire", key));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.err.println("There was an error getting the GeoFire location: " + databaseError);
+            }
+        });
+
+    }
+
+
+
+
+    public void updateDetails(View view){
 
         if(firstClick) {
+            //allow edits
+            lotName.setEnabled(true);
+            lotName.setFocusableInTouchMode(true);
+
+            ownerName.setEnabled(true);
+            ownerName.setFocusableInTouchMode(true);
 
             capacity.setEnabled(true);
             capacity.setFocusableInTouchMode(true);
 
-            changeCapacityButton.setText("Save");
+            phoneNumber.setEnabled(true);
+            phoneNumber.setFocusableInTouchMode(true);
+
+            changeDetailsButton.setText("Save");
             firstClick=false;
         }else if(!firstClick){
 
 
+
             mDatabase.child("Parking Lots").child(clickId).child("capacity").setValue(capacity.getText().toString());
+            mDatabase.child("Parking Lots").child(clickId).child("ownerName").setValue(ownerName.getText().toString());
+            mDatabase.child("Parking Lots").child(clickId).child("lotName").setValue(lotName.getText().toString());
+            mDatabase.child("Parking Lots").child(clickId).child("phoneNumber").setValue(phoneNumber.getText().toString());
+
             Log.i("second Click","Second Click");
-            changeCapacityButton.setText("update capacity");
+            changeDetailsButton.setText("update details");
             //capacity.setFocusableInTouchMode(false);
             capacity.setEnabled(false);
 

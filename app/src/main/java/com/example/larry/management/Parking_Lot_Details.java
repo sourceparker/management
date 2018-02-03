@@ -20,7 +20,7 @@ public class Parking_Lot_Details {
     private String lotName;
     private String ownerName;
     private String capacity;
-    private static GeoFire location;
+    private GeoFire location;
 
 
 
@@ -36,7 +36,7 @@ public class Parking_Lot_Details {
         this.ownerName = ownerName;
         this.phoneNumber=phoneNumber;
         this.capacity = capacity;
-       // this.location=location;
+        this.location=location;
        // this.phoneNumber=
     }
 
@@ -48,9 +48,9 @@ public class Parking_Lot_Details {
         this.phoneNumber = phoneNumber;
     }
 
-    public static GeoFire getLocation() {return location;}
+    public  GeoFire getLocation() {return location;}
 
-    public static void setLocation(GeoFire mlocation) {location = mlocation;}
+    public  void setLocation(GeoFire mlocation) {location = mlocation;}
 
     public String getLotName() {
         return lotName;

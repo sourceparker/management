@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="LOT_ID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.121"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.68"
@@ -37,23 +37,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="Lot Name"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
+    <EditText
         android:id="@+id/lotNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/lot_idTextView"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/lot_idTextView"
         app:layout_constraintTop_toBottomOf="@+id/lot_idTextView" />
 
     <TextView
@@ -61,23 +60,23 @@
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="Owner"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <TextView
+    <EditText
         android:id="@+id/ownerTextView"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/lotNameTextView"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/lotNameTextView"
         app:layout_constraintTop_toBottomOf="@+id/lotNameTextView" />
 
     <TextView
@@ -85,23 +84,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="Phone Number"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <TextView
+    <EditText
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/ownerTextView"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/ownerTextView"
         app:layout_constraintTop_toBottomOf="@+id/ownerTextView" />
 
     <TextView
@@ -109,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="Active Requests"
         android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
@@ -122,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="TextView"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/phoneNumberTextView"
@@ -148,44 +147,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="25dp"
         android:text="Capacity"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/text"
         app:layout_constraintStart_toStartOf="@+id/text"
         app:layout_constraintTop_toBottomOf="@+id/text"
-        app:layout_constraintVertical_bias="0.20999998" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/capacityEditText"
-
         android:layout_width="54dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:focusable="false"
         android:inputType="none|number"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/reguestsTextView"
+        app:layout_constraintEnd_toEndOf="@+id/phoneNumberTextView"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@+id/phoneNumberTextView"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/changeCapacityButton"
+        android:id="@+id/changeDetailsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:onClick="updateCapacity"
-        android:text="Update capacity"
+        android:onClick="updateDetails"
+        android:text="Update Details"
         app:layout_constraintBottom_toTopOf="@+id/removeLotButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Coordinates"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/coordinatesEditText"
+        android:layout_width="177dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="@+id/capacityEditText"
+        app:layout_constraintStart_toStartOf="@+id/capacityEditText"
+        app:layout_constraintTop_toBottomOf="@+id/capacityEditText" />
 
 </android.support.constraint.ConstraintLayout>
