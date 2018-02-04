@@ -30,10 +30,10 @@ public class Per_User_Action_Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_per_user__action__details);
-        user_id=findViewById(R.id.lot_idTextView);
-        name=findViewById(R.id.lotNameTextView);
-        phoneNumber=findViewById(R.id.ownerTextView);
-        email=findViewById(R.id.phoneNumberTextView);
+        user_id=findViewById(R.id.lot_idEditText);
+        name=findViewById(R.id.lotNameEditText);
+        phoneNumber=findViewById(R.id.ownerEditText);
+        email=findViewById(R.id.phoneNumberEditText);
         deleteButton=findViewById(R.id.deleteButton);
 
         mDatabase= FirebaseDatabase.getInstance().getReference();
