@@ -65,7 +65,7 @@ public class New_lot extends AppCompatActivity {
 
 
 
-            Toast.makeText(getApplicationContext(),"New Lot saved",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"New Lot saved",Toast.LENGTH_LONG).show();
 
             lotNameEditText.setText("");
             ownerNameEditText.setText("");

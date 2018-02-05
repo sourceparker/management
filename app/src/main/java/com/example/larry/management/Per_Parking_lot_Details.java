@@ -30,6 +30,7 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
     private EditText phoneNumber;
     private Button changeDetailsButton;
     private DatabaseReference mDatabase;
+    Parking_Lot_Details parking_lot_details=new Parking_Lot_Details();
     private String clickId;
     boolean firstClick=true;
 
@@ -58,8 +59,7 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-
-                        Parking_Lot_Details parking_lot_details= dataSnapshot.getValue(Parking_Lot_Details.class);
+                      parking_lot_details= dataSnapshot.getValue(Parking_Lot_Details.class);
                         lot_id.setText(clickId);
                         capacity.setText(parking_lot_details.getCapacity());
                         phoneNumber.setText(parking_lot_details.getPhoneNumber());
@@ -87,6 +87,11 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
 
     }
+
+
+
+
+
 
     private void retrieveCoordinates() {
 
@@ -149,10 +154,10 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
 
 
-            mDatabase.child("Parking Lots").child(clickId).child("capacity").setValue(capacity.getText().toString());
-            mDatabase.child("Parking Lots").child(clickId).child("ownerName").setValue(ownerName.getText().toString());
-            mDatabase.child("Parking Lots").child(clickId).child("lotName").setValue(lotName.getText().toString());
-            mDatabase.child("Parking Lots").child(clickId).child("phoneNumber").setValue(phoneNumber.getText().toString());
+            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("capacity").setValue(capacity.getText().toString());
+            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("ownerName").setValue(ownerName.getText().toString());
+            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("lotName").setValue(lotName.getText().toString());
+            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("phoneNumber").setValue(phoneNumber.getText().toString());
 
             updateLocation();
 
@@ -169,16 +174,16 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     private void updateLocation() {
         //Log.i("TAG",clickId);
-        mDatabase.child("Parking Lots").child(clickId).child("coordinates").removeValue();
-        mDatabase.child("Parking Lots").child(clickId);
+        mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).removeValue();
+
         GeoFire geoFire= new GeoFire(mDatabase);
-        geoFire.setLocation(clickId,new GeoLocation(Double.parseDouble(longi.getText().toString()),
+        geoFire.setLocation("coordinates",new GeoLocation(Double.parseDouble(longi.getText().toString()),
                 Double.parseDouble(lati.getText().toString())));
     }
 
     public void removeLot(View view){
 
-        mDatabase.child("Parking Lots").child(clickId).removeValue();
+        mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).removeValue();
 
         Intent intent=new Intent(Per_Parking_lot_Details.this,Parking_locations.class);
         startActivity(intent);
