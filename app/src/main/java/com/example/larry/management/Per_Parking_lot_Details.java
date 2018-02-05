@@ -185,6 +185,7 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     public void removeLot(View view){
 
+        mDatabase= FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).removeValue();
         mDatabase.child("Coordinates").child(parking_lot_details.getLot_id()).removeValue();
 
