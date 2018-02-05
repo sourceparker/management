@@ -111,7 +111,7 @@ public class SignUpActivity extends AppCompatActivity {
                         userDetails = new IsUser(edtFirstName.getText().toString(), edtLastName.getText().toString(),
                                 edtEmail.getText().toString(), editPassword.getText().toString(),
                                 edtPhoneNumber.getText().toString());
-                        mDatabaseReference.child("isUser")
+                        mDatabaseReference.child("isManagement")
                                 .push().setValue(userDetails);
 
                         edtFirstName.setText("");
@@ -124,6 +124,10 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.d(TAG, "createUserWithEmail:success");
                         Toast.makeText(SignUpActivity.this, "Sign up success", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = mAuth.getCurrentUser();
+
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        startActivity(intent);
+
 
 
 

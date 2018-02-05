@@ -80,7 +80,6 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startSignIn();
-                //                    next activity must start from here
 
             }
         });

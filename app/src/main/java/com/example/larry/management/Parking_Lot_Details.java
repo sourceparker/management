@@ -37,7 +37,7 @@ public class Parking_Lot_Details {
         this.phoneNumber=phoneNumber;
         this.capacity = capacity;
         this.location=location;
-       // this.phoneNumber=
+
     }
 
     public String getPhoneNumber() {
@@ -85,15 +85,15 @@ public class Parking_Lot_Details {
     public void geoLocation(Double latitude, Double longitude) {
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Parking Lots");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Coordinates");
        // ref.child("Parking Lots").child(lot_id).setValue(item);
 
-        GeoFire geoFire = new GeoFire(ref.child(getLot_id()));
+        GeoFire geoFire = new GeoFire(ref);
 
 
         // geoFire.setLocation("location", new GeoLocation(latitude, longitude));
 
-        geoFire.setLocation("coordinates", new GeoLocation(latitude, longitude),
+        geoFire.setLocation(getLot_id(), new GeoLocation(latitude, longitude),
                 new GeoFire.CompletionListener() {
 
                     @Override

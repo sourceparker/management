@@ -24,6 +24,7 @@ public class IsUser {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.phoneNumber=phoneNumber;
     }
 
     public IsUser(String user_id,String firstName, String lastName, String email, String password, String phoneNumber) {
@@ -31,7 +32,7 @@ public class IsUser {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-       // this.user_id=user_id;
+        this.user_id=user_id;
         this.phoneNumber = phoneNumber;
 
 

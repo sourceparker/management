@@ -95,10 +95,10 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     private void retrieveCoordinates() {
 
-        mDatabase= FirebaseDatabase.getInstance().getReference("Parking Lots").child(clickId);
+        mDatabase= FirebaseDatabase.getInstance().getReference("Coordinates");
         //Log.i("TAG",clickId);
         GeoFire geoFire= new GeoFire(mDatabase);
-        geoFire.getLocation("coordinates", new LocationCallback() {
+        geoFire.getLocation(clickId, new LocationCallback() {
             @Override
             public void onLocationResult(String key, GeoLocation location) {
                 if (location != null) {
@@ -152,12 +152,13 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
             firstClick=false;
         }else if(!firstClick){
 
-
+            mDatabase= FirebaseDatabase.getInstance().getReference();
 
             mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("capacity").setValue(capacity.getText().toString());
             mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("ownerName").setValue(ownerName.getText().toString());
             mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("lotName").setValue(lotName.getText().toString());
             mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("phoneNumber").setValue(phoneNumber.getText().toString());
+
 
             updateLocation();
 
@@ -174,16 +175,18 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     private void updateLocation() {
         //Log.i("TAG",clickId);
-        mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).removeValue();
-
+       // mDatabase= FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Coordinates").child(parking_lot_details.getLot_id()).removeValue();
+        mDatabase= FirebaseDatabase.getInstance().getReference("Coordinates");
         GeoFire geoFire= new GeoFire(mDatabase);
-        geoFire.setLocation("coordinates",new GeoLocation(Double.parseDouble(longi.getText().toString()),
+        geoFire.setLocation(clickId,new GeoLocation(Double.parseDouble(longi.getText().toString()),
                 Double.parseDouble(lati.getText().toString())));
     }
 
     public void removeLot(View view){
 
         mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).removeValue();
+        mDatabase.child("Coordinates").child(parking_lot_details.getLot_id()).removeValue();
 
         Intent intent=new Intent(Per_Parking_lot_Details.this,Parking_locations.class);
         startActivity(intent);

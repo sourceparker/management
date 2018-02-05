@@ -21,11 +21,11 @@ import java.util.ArrayList;
 public class Registered_users extends AppCompatActivity {
 
     private DatabaseReference mDatabaseReference;
-   // private DatabaseReference mDatabaseReference;
+
 
 
     private ListView registered_usersListView;
-   // ArrayList<String> keyHolder= new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
