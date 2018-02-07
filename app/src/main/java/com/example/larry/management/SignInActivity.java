@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,31 +39,33 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 public class SignInActivity extends AppCompatActivity {
 
-    private static final String TAG = "SignInActivity";
+    private static final String TAG = "MainActivity";
+
     private Button mSignIn;
     private EditText mEditEmail;
     private EditText mEditPassword;
-    private Button register;
+    private TextView register;
 
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
     FirebaseAuth.AuthStateListener mAuthStateListener;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+
         //make instances of widgets
         mEditEmail = findViewById(R.id.edtmail);
         mEditPassword = findViewById(R.id.editpassword);
         mSignIn = findViewById(R.id.btnSignIn);
-        register = findViewById(R.id.btnRegister);
+        register = findViewById(R.id.regTextView);
 
         //creating an instance of firebase authentication
         mAuth = FirebaseAuth.getInstance();
@@ -80,6 +83,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startSignIn();
+                //                    next activity must start from here
 
             }
         });
@@ -124,8 +128,6 @@ public class SignInActivity extends AppCompatActivity {
 
                         mEditEmail.setText("");
                         mEditPassword.setText("");
-                        //for trial
-
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                         startActivity(intent);
 
@@ -140,5 +142,4 @@ public class SignInActivity extends AppCompatActivity {
             });
         }
     }
-
 }

@@ -11,4 +11,5 @@
     <string name="new_user_register">New User? Register</string>
     <string name="phone_number">Phone Number</string>
     <string name="title_activity_maps">Map</string>
+    <string name="not_a_member_yet_click_to_register">Not a member yet? Click to register</string>
 </resources>

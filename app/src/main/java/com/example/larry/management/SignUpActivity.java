@@ -1,9 +1,5 @@
 package com.example.larry.management;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText edtPhoneNumber;
     private Button btnSignUp;
 
-    IsUser userDetails = new IsUser();
+    IsManagement userDetails = new IsManagement();
 
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mAuth;
@@ -108,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         mDatabase = FirebaseDatabase.getInstance();
                         mDatabaseReference = mDatabase.getReference();
-                        userDetails = new IsUser(edtFirstName.getText().toString(), edtLastName.getText().toString(),
+                        userDetails = new IsManagement(edtFirstName.getText().toString(), edtLastName.getText().toString(),
                                 edtEmail.getText().toString(), editPassword.getText().toString(),
                                 edtPhoneNumber.getText().toString());
                         mDatabaseReference.child("isManagement")
@@ -127,8 +123,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(intent);
-
-
 
 
                     } else {
