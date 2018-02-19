@@ -29,7 +29,9 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
     private EditText lati;
     private EditText phoneNumber;
     private Button changeDetailsButton;
-    private DatabaseReference mDatabase;
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
+
     Parking_Lot_Details parking_lot_details=new Parking_Lot_Details();
     private String clickId;
     boolean firstClick=true;
@@ -51,11 +53,11 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
         clickId=intent.getStringExtra("Click ID");
         Log.i("intent",clickId);
 
-        mDatabase= FirebaseDatabase.getInstance().getReference();
+        databaseReference = mDatabase.getReference();
 
         if(clickId!=null) {
 
-            mDatabase.child("Parking Lots").child(clickId).addValueEventListener(new ValueEventListener() {
+            databaseReference.child("Parking Lots").child(clickId).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -95,9 +97,9 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     private void retrieveCoordinates() {
 
-        mDatabase= FirebaseDatabase.getInstance().getReference("Coordinates");
+        databaseReference = mDatabase.getReference("Coordinates");
         //Log.i("TAG",clickId);
-        GeoFire geoFire= new GeoFire(mDatabase);
+        GeoFire geoFire= new GeoFire(databaseReference);
         geoFire.getLocation(clickId, new LocationCallback() {
             @Override
             public void onLocationResult(String key, GeoLocation location) {
@@ -152,12 +154,12 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
             firstClick=false;
         }else if(!firstClick){
 
-            mDatabase= FirebaseDatabase.getInstance().getReference();
+            databaseReference = mDatabase.getReference();
 
-            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("capacity").setValue(capacity.getText().toString());
-            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("ownerName").setValue(ownerName.getText().toString());
-            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("lotName").setValue(lotName.getText().toString());
-            mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).child("phoneNumber").setValue(phoneNumber.getText().toString());
+            databaseReference.child("Parking Lots").child(parking_lot_details.getLot_id()).child("capacity").setValue(capacity.getText().toString());
+            databaseReference.child("Parking Lots").child(parking_lot_details.getLot_id()).child("ownerName").setValue(ownerName.getText().toString());
+            databaseReference.child("Parking Lots").child(parking_lot_details.getLot_id()).child("lotName").setValue(lotName.getText().toString());
+            databaseReference.child("Parking Lots").child(parking_lot_details.getLot_id()).child("phoneNumber").setValue(phoneNumber.getText().toString());
 
 
             updateLocation();
@@ -165,8 +167,18 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
             Log.i("second Click","Second Click");
             changeDetailsButton.setText("update details");
+
             //capacity.setFocusableInTouchMode(false);
+
+            //rendering the editTexts non-editable
             capacity.setEnabled(false);
+            lotName.setEnabled(false);
+            ownerName.setEnabled(false);
+            phoneNumber.setEnabled(false);
+            longi.setEnabled(false);
+            lati.setEnabled(false);
+
+
 
             Toast.makeText(getApplicationContext(),"Details updated",Toast.LENGTH_LONG).show();
             firstClick=true;
@@ -175,19 +187,19 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     private void updateLocation() {
         //Log.i("TAG",clickId);
-       // mDatabase= FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Coordinates").child(parking_lot_details.getLot_id()).removeValue();
-        mDatabase= FirebaseDatabase.getInstance().getReference("Coordinates");
-        GeoFire geoFire= new GeoFire(mDatabase);
+       // databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Coordinates").child(parking_lot_details.getLot_id()).removeValue();
+        databaseReference =mDatabase.getReference("Coordinates");
+        GeoFire geoFire= new GeoFire(databaseReference);
         geoFire.setLocation(clickId,new GeoLocation(Double.parseDouble(longi.getText().toString()),
                 Double.parseDouble(lati.getText().toString())));
     }
 
     public void removeLot(View view){
 
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Parking Lots").child(parking_lot_details.getLot_id()).removeValue();
-        mDatabase.child("Coordinates").child(parking_lot_details.getLot_id()).removeValue();
+        databaseReference = mDatabase.getReference();
+        databaseReference.child("Parking Lots").child(parking_lot_details.getLot_id()).removeValue();
+        databaseReference.child("Coordinates").child(parking_lot_details.getLot_id()).removeValue();
 
         Intent intent=new Intent(Per_Parking_lot_Details.this,Parking_locations.class);
         startActivity(intent);

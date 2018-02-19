@@ -16,7 +16,7 @@ public class New_lot extends AppCompatActivity {
     private EditText capacityEditText;
     private EditText latitudeEditText;
     private EditText longitudeEditText;
-  //private FirebaseDatabase mDatabase;
+    private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
     private Parking_Lot_Details parkingLotDetails= new Parking_Lot_Details();
 
     private DatabaseReference mDatabaseReference;
@@ -45,7 +45,7 @@ public class New_lot extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"All fields must be filled",Toast.LENGTH_LONG).show();
         }else{
 
-            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Parking Lots");
+            mDatabaseReference = mDatabase.getReference("Parking Lots");
 
             String id = mDatabaseReference.push().getKey();
 
