@@ -40,6 +40,8 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_per__parking_lot__details);
+
+        //reference to widgets
         lot_id=findViewById(R.id.lot_idEditText);
         lotName=findViewById(R.id.lotNameEditText);
         capacity=findViewById(R.id.capacityEditText);
@@ -49,6 +51,7 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
         longi=findViewById(R.id.longEditText);
         lati=findViewById(R.id.latEditText);
 
+        //The id of the parking lot clicked in the listView is saved in the variable clickId
         Intent intent=getIntent();
         clickId=intent.getStringExtra("Click ID");
         Log.i("intent",clickId);

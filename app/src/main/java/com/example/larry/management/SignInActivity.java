@@ -49,7 +49,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText mEditEmail;
     private EditText mEditPassword;
     private TextView register;
-
+    public User user = new User();
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
@@ -93,7 +93,8 @@ public class SignInActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
                     Toast.makeText(SignInActivity.this, "authentication success", Toast.LENGTH_SHORT).show();
-
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    user.setUser_id(firebaseUser.getUid());
 //                    next activity must start from here
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -123,7 +124,9 @@ public class SignInActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        user.setUser_id(firebaseUser.getUid());
+
 
 
                         mEditEmail.setText("");

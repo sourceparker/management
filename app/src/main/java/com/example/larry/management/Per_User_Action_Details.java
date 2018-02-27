@@ -49,7 +49,7 @@ public class Per_User_Action_Details extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
 
-                        IsUser isUser = dataSnapshot.getValue(IsUser.class);
+                        User isUser = dataSnapshot.getValue(User.class);
                         user_id.setText(clickId);
                         email.setText(isUser.getEmail());
                         phoneNumber.setText(isUser.getPhoneNumber());

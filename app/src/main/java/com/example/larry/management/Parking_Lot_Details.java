@@ -1,12 +1,17 @@
 package com.example.larry.management;
 
+import android.telephony.SmsManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by Larry on 1/27/2018.
@@ -15,13 +20,14 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Parking_Lot_Details {
 
     private String lot_id;
-
     private String phoneNumber;
     private String lotName;
     private String ownerName;
     private String capacity;
+    private String  verNum;
     private GeoFire location;
-
+    private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference;
 
 
 
@@ -38,6 +44,14 @@ public class Parking_Lot_Details {
         this.capacity = capacity;
         this.location=location;
 
+    }
+
+    public String getVerNum() {
+        return verNum;
+    }
+
+    public void setVerNum(String verNum) {
+        this.verNum = verNum;
     }
 
     public String getPhoneNumber() {
@@ -81,8 +95,10 @@ public class Parking_Lot_Details {
     public void setLot_id(String lot_id) {this.lot_id = lot_id;}
 
 
+    //This method takes the coordinates saves it as a GeoFire
 
-    public void geoLocation(Double latitude, Double longitude) {
+
+    public void geoLocation(Double latitude,Double longitude) {
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Coordinates");
@@ -93,7 +109,8 @@ public class Parking_Lot_Details {
 
         // geoFire.setLocation("location", new GeoLocation(latitude, longitude));
 
-        geoFire.setLocation(getLot_id(), new GeoLocation(latitude, longitude),
+
+        geoFire.setLocation(getLot_id(), new GeoLocation(latitude,longitude),
                 new GeoFire.CompletionListener() {
 
                     @Override
@@ -111,5 +128,29 @@ public class Parking_Lot_Details {
 
 
     }
+
+    //This method maps the Random number of the owner to his lot_id
+
+    public void checkNum() {
+
+        Random rand = new Random();
+        int rand1=rand.nextInt(899)+100;
+        int rand2=rand.nextInt(899)+100;
+
+        setVerNum(String.valueOf(rand1)+"-"+String.valueOf(rand2));
+
+        Log.i("num", getVerNum());
+
+
+
+        databaseReference=mDatabase.getReference("Verification").child("Key Pairs");
+
+        databaseReference.child(getVerNum()).setValue(getLot_id());
+
+    }
+
+
+
+
 
 }

@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btnSignUp;
 
     IsManagement userDetails = new IsManagement();
+    User user=new User();
 
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mAuth;
@@ -59,7 +60,8 @@ public class SignUpActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
                     Toast.makeText(SignUpActivity.this, "authentication success", Toast.LENGTH_SHORT).show();
-
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    user.setUser_id(firebaseUser.getUid());
 //                    next activity comes here
                     Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -119,7 +121,8 @@ public class SignUpActivity extends AppCompatActivity {
                         //
                         Log.d(TAG, "createUserWithEmail:success");
                         Toast.makeText(SignUpActivity.this, "Sign up success", Toast.LENGTH_SHORT).show();
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        user.setUser_id(firebaseUser.getUid());
 
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(intent);

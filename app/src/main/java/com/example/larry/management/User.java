@@ -4,7 +4,7 @@ package com.example.larry.management;
  * Created by diayan on 1/23/2018.
  */
 
-public class IsUser {
+public class User {
 
     private String user_id;
     private String firstName;
@@ -16,10 +16,10 @@ public class IsUser {
 
 
 
-    public IsUser() {
+    public User() {
 
     }
-    public IsUser(String firstName, String lastName, String email, String password, String phoneNumber) {
+    public User(String firstName, String lastName, String email, String password, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -27,7 +27,7 @@ public class IsUser {
         this.phoneNumber=phoneNumber;
     }
 
-    public IsUser(String user_id,String firstName, String lastName, String email, String password, String phoneNumber) {
+    public User(String user_id, String firstName, String lastName, String email, String password, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

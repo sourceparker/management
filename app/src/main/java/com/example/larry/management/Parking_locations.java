@@ -95,6 +95,9 @@ public class Parking_locations extends AppCompatActivity {
             }
         });
 
+        //Parking locations in the datasnapshot are indexed by storing them in an arrayList
+        //This is done so that the first click of the listView references the first data of the datasnapshot
+
         parking_locationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
@@ -123,8 +126,6 @@ public class Parking_locations extends AppCompatActivity {
 
                     }//onCancelled
                 });
-
-
 
 
             }
