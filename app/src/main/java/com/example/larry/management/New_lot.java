@@ -14,6 +14,7 @@ public class New_lot extends AppCompatActivity {
     private EditText ownerNameEditText;
     private EditText phoneNumberEditText;
     private EditText capacityEditText;
+    private EditText emailEditText;
     private EditText latitudeEditText;
     private EditText longitudeEditText;
     private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
@@ -32,6 +33,7 @@ public class New_lot extends AppCompatActivity {
         latitudeEditText=findViewById(R.id.latitudeEditText);
         longitudeEditText=findViewById(R.id.longitudeEditText);
         phoneNumberEditText=findViewById(R.id.phoneNumberEditText);
+        emailEditText=findViewById(R.id.emailEditText);
     }
 
     //This method pushes all details to the database after making sure none of the fields are left blank
@@ -41,6 +43,7 @@ public class New_lot extends AppCompatActivity {
                 ||ownerNameEditText.getText().toString().matches("")
                 ||capacityEditText.getText().toString().matches("")
                 ||latitudeEditText.getText().toString().matches("")
+                ||emailEditText.getText().toString().matches("")
                 ||longitudeEditText.getText().toString().matches("")
 
 
@@ -63,11 +66,13 @@ public class New_lot extends AppCompatActivity {
             //The entries are passed to the constructor of Parking Lot Details
             
             parkingLotDetails=new Parking_Lot_Details(id,lotNameEditText.getText().toString(),ownerNameEditText.getText().toString(),
-                    phoneNumberEditText.getText().toString(),capacityEditText.getText().toString());
+                    phoneNumberEditText.getText().toString(),emailEditText.getText().toString(),capacityEditText.getText().toString());
 
 
             //All details are pushed to the database using the generated id
             mDatabaseReference.child(id).setValue(parkingLotDetails);
+
+
 
             Double latitude= Double.parseDouble(latitudeEditText.getText().toString());
             Double longitude=Double.parseDouble(longitudeEditText.getText().toString());
@@ -79,8 +84,7 @@ public class New_lot extends AppCompatActivity {
 
             //random number of the lot owner gets mapped to the lot_id
 
-            parkingLotDetails.checkNum();
-
+           // parkingLotDetails.checkNum();
 
 
             Toast.makeText(getApplicationContext(),"New Lot saved",Toast.LENGTH_LONG).show();
@@ -91,6 +95,7 @@ public class New_lot extends AppCompatActivity {
 
             lotNameEditText.setText("");
             ownerNameEditText.setText("");
+            emailEditText.setText("");
             capacityEditText.setText("");
             latitudeEditText.setText("");
             longitudeEditText.setText("");

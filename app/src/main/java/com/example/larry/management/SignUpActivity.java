@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void startSignUp() {
         //if isUser is true
-        String email = edtEmail.getText().toString();
+        final String email = edtEmail.getText().toString();
         String password = editPassword.getText().toString();
 
         //forces the user to fill all the fields instead of just edtEmail and editPassword
@@ -112,6 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                         mDatabaseReference.child("isManagement")
                                 .push().setValue(userDetails);
 
+
                         edtFirstName.setText("");
                         edtLastName.setText("");
                         edtEmail.setText("");
@@ -124,7 +125,11 @@ public class SignUpActivity extends AppCompatActivity {
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
                         user.setUser_id(firebaseUser.getUid());
 
+
+
+
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+
                         startActivity(intent);
 
 

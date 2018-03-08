@@ -24,6 +24,7 @@ public class Parking_Lot_Details {
     private String lotName;
     private String ownerName;
     private String capacity;
+    private String email;
     private String  verNum;
     private GeoFire location;
     private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
@@ -36,14 +37,22 @@ public class Parking_Lot_Details {
 
     }
 
-    public Parking_Lot_Details(String lot_id,String lotName, String ownerName, String phoneNumber,String capacity) {
+    public Parking_Lot_Details(String lot_id,String lotName, String ownerName, String phoneNumber, String email, String capacity) {
         this.lot_id=lot_id;
         this.lotName = lotName;
         this.ownerName = ownerName;
         this.phoneNumber=phoneNumber;
         this.capacity = capacity;
-        this.location=location;
+        this.email=email;
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getVerNum() {
@@ -107,7 +116,7 @@ public class Parking_Lot_Details {
         GeoFire geoFire = new GeoFire(ref);
 
 
-        // geoFire.setLocation("location", new GeoLocation(latitude, longitude));
+
 
 
         geoFire.setLocation(getLot_id(), new GeoLocation(latitude,longitude),
