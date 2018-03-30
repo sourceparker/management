@@ -28,6 +28,7 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
     private EditText longi;
     private EditText lati;
     private EditText phoneNumber;
+    private EditText requestsEditText;
     private Button changeDetailsButton;
     private DatabaseReference databaseReference;
     private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
@@ -50,6 +51,7 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
         changeDetailsButton=findViewById(R.id.changeDetailsButton);
         longi=findViewById(R.id.longEditText);
         lati=findViewById(R.id.latEditText);
+        requestsEditText=findViewById(R.id.requestsEditText);
 
         //The id of the parking lot clicked in the listView is saved in the variable clickId
         Intent intent=getIntent();
@@ -70,7 +72,10 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
                         phoneNumber.setText(parking_lot_details.getPhoneNumber());
                         lotName.setText(parking_lot_details.getLotName());
                         ownerName.setText(parking_lot_details.getOwnerName());
-      //                coordinates.setText(parking_lot_details.getLocation().toString());
+
+
+                        //Retrieve requests
+                        retrieveRequest();
 
                         //Retrieve coordinates
                         retrieveCoordinates();
@@ -93,9 +98,43 @@ public class Per_Parking_lot_Details extends AppCompatActivity {
 
     }
 
+    private void retrieveRequest() {
+        final String lot_email= parking_lot_details.getEmail().replace(".","");
 
 
 
+        databaseReference.child("Requests").child(lot_email).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+
+                    //Counts number of requests if that reference exists
+                    long requestsMade = dataSnapshot.getChildrenCount();
+                    Log.i(dataSnapshot.getKey(), String.valueOf(requestsMade));
+
+                    requestsEditText.setText(Long.toString(requestsMade));
+
+
+
+
+                    }else{
+                    requestsEditText.setText("0");
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 
 
     private void retrieveCoordinates() {

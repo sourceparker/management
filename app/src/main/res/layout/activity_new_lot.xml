@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/latitudeEditText"
+        android:id="@+id/longEditText"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -80,15 +80,15 @@
         android:hint="Longitude"
         android:inputType="numberSigned|numberDecimal"
         android:numeric="integer|signed|decimal"
-        app:layout_constraintBaseline_toBaselineOf="@+id/longitudeEditText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/latEditText"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/longitudeEditText"
+        android:id="@+id/latEditText"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/latitudeEditText"
-        android:layout_alignBottom="@+id/latitudeEditText"
+        android:layout_alignBaseline="@+id/longEditText"
+        android:layout_alignBottom="@+id/longEditText"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="8dp"
@@ -98,7 +98,7 @@
         android:hint="Latitude"
         android:inputType="numberSigned|numberDecimal"
         android:numeric="integer|signed|decimal"
-        app:layout_constraintEnd_toStartOf="@+id/latitudeEditText"
+        app:layout_constraintEnd_toStartOf="@+id/longEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
@@ -136,7 +136,7 @@
         android:id="@+id/addLotButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/longitudeEditText"
+        android:layout_below="@+id/latEditText"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -145,9 +145,9 @@
         android:onClick="addNewLot"
         android:text="Add lot"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/latitudeEditText"
-        app:layout_constraintStart_toStartOf="@+id/longitudeEditText"
-        app:layout_constraintTop_toBottomOf="@+id/longitudeEditText" />
+        app:layout_constraintEnd_toEndOf="@+id/longEditText"
+        app:layout_constraintStart_toStartOf="@+id/latEditText"
+        app:layout_constraintTop_toBottomOf="@+id/latEditText" />
 
     <EditText
         android:id="@+id/phoneNumberEditText"

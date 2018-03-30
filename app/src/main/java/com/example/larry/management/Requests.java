@@ -40,32 +40,37 @@ public class Requests extends AppCompatActivity {
 
 
 
-        mDatabaseReference.child("Requests").orderByKey().addChildEventListener(new ChildEventListener() {
+        mDatabaseReference.child("Requests").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //gets parking lot_id
                key = dataSnapshot.getKey();
+               Log.i("keyyyy",key);
+
+                requestsArrayList.add(key);
+                requestsListView.setAdapter(requestsArrayAdapter);
 
                //uses the key obtained to display the name in the listView
 
-               mDatabaseReference.child("Parking Lots").child(key).addValueEventListener(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(DataSnapshot dataSnapshot) {
-                       if (dataSnapshot.exists()) {
-                           Parking_Lot_Details parking_lot_details=dataSnapshot.getValue(Parking_Lot_Details.class);
-                           Log.i("datasnapshot", dataSnapshot.toString());
-                          requestsArrayList.add(parking_lot_details.getLotName());
-                           requestsListView.setAdapter(requestsArrayAdapter);
-                       }
-
-
-                   }
-
-                   @Override
-                   public void onCancelled(DatabaseError databaseError) {
-
-                   }
-               });
+//               mDatabaseReference.child("Parking Lots").child(key).addValueEventListener(new ValueEventListener() {
+//                   @Override
+//                   public void onDataChange(DataSnapshot dataSnapshot) {
+//                       if (dataSnapshot.exists()) {
+//                           Parking_Lot_Details parking_lot_details=dataSnapshot.getValue(Parking_Lot_Details.class);
+//                           Log.i("datasnapshot", dataSnapshot.toString());
+//
+//                           requestsArrayList.add(parking_lot_details.getLotName());
+//                           requestsListView.setAdapter(requestsArrayAdapter);
+//                       }
+//
+//
+//                   }
+//
+//                   @Override
+//                   public void onCancelled(DatabaseError databaseError) {
+//
+//                   }
+//               });
 
             }
 
@@ -88,7 +93,7 @@ public class Requests extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+      });
 
 
 
@@ -96,7 +101,7 @@ public class Requests extends AppCompatActivity {
         requestsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                mDatabaseReference.child("Requests").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                mDatabaseReference.child("Requests").child(requestsArrayList.get(position)).addListenerForSingleValueEvent(new ValueEventListener() {
                    ArrayList<String> keyHolder= new ArrayList<>();
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

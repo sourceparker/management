@@ -15,8 +15,8 @@ public class New_lot extends AppCompatActivity {
     private EditText phoneNumberEditText;
     private EditText capacityEditText;
     private EditText emailEditText;
-    private EditText latitudeEditText;
-    private EditText longitudeEditText;
+    private EditText longEditText;
+    private EditText latEditText;
     private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
     private Parking_Lot_Details parkingLotDetails= new Parking_Lot_Details();
 
@@ -30,8 +30,8 @@ public class New_lot extends AppCompatActivity {
         lotNameEditText= findViewById(R.id.lotNameEditText);
         ownerNameEditText= findViewById(R.id.ownerNameEditText);
         capacityEditText= findViewById(R.id.capacityEditText);
-        latitudeEditText=findViewById(R.id.latitudeEditText);
-        longitudeEditText=findViewById(R.id.longitudeEditText);
+        longEditText =findViewById(R.id.longEditText);
+        latEditText =findViewById(R.id.latEditText);
         phoneNumberEditText=findViewById(R.id.phoneNumberEditText);
         emailEditText=findViewById(R.id.emailEditText);
     }
@@ -42,9 +42,9 @@ public class New_lot extends AppCompatActivity {
         if(lotNameEditText.getText().toString().matches("")
                 ||ownerNameEditText.getText().toString().matches("")
                 ||capacityEditText.getText().toString().matches("")
-                ||latitudeEditText.getText().toString().matches("")
+                || longEditText.getText().toString().matches("")
                 ||emailEditText.getText().toString().matches("")
-                ||longitudeEditText.getText().toString().matches("")
+                || latEditText.getText().toString().matches("")
 
 
                 ) {
@@ -74,8 +74,8 @@ public class New_lot extends AppCompatActivity {
 
 
 
-            Double latitude= Double.parseDouble(latitudeEditText.getText().toString());
-            Double longitude=Double.parseDouble(longitudeEditText.getText().toString());
+            Double latitude= Double.parseDouble(longEditText.getText().toString());
+            Double longitude=Double.parseDouble(latEditText.getText().toString());
 
             parkingLotDetails.setLotName(lotNameEditText.getText().toString());
             parkingLotDetails.setPhoneNumber(phoneNumberEditText.getText().toString());
@@ -97,8 +97,8 @@ public class New_lot extends AppCompatActivity {
             ownerNameEditText.setText("");
             emailEditText.setText("");
             capacityEditText.setText("");
-            latitudeEditText.setText("");
-            longitudeEditText.setText("");
+            longEditText.setText("");
+            latEditText.setText("");
             phoneNumberEditText.setText("");
 
 
