@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void startSignUp() {
-        //if isUser is true
+
         final String email = edtEmail.getText().toString();
         String password = editPassword.getText().toString();
 
@@ -102,7 +102,11 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // Sign in success, obtain UID and push details to database using UID as key
+
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        user.setUser_id(firebaseUser.getUid());
+
 
                         mDatabase = FirebaseDatabase.getInstance();
                         mDatabaseReference = mDatabase.getReference();
@@ -110,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 edtEmail.getText().toString(), editPassword.getText().toString(),
                                 edtPhoneNumber.getText().toString());
                         mDatabaseReference.child("isManagement")
-                                .push().setValue(userDetails);
+                                .child(user.getUser_id()).setValue(userDetails);
 
 
                         edtFirstName.setText("");
@@ -122,21 +126,24 @@ public class SignUpActivity extends AppCompatActivity {
                         //
                         Log.d(TAG, "createUserWithEmail:success");
                         Toast.makeText(SignUpActivity.this, "Sign up success", Toast.LENGTH_SHORT).show();
-                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                        user.setUser_id(firebaseUser.getUid());
+
 
 
 
 
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
 
+                        //USer id is sent to main activity
+
+                        intent.putExtra("UID",user.getUser_id());
                         startActivity(intent);
 
 
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                        Toast.makeText(SignUpActivity.this, "Authentication failed. "
+                                + task.getException().getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
