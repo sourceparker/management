@@ -54,11 +54,14 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
     FirebaseAuth.AuthStateListener mAuthStateListener;
+    UserSession session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        session=new UserSession(getApplicationContext());
 
 
         //make instances of widgets
@@ -107,6 +110,13 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Check if session is true
+        if(session.loggedIn()) {
+            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     //implementing method startSignIn() to handle sign in and authentication of the app
@@ -129,16 +139,24 @@ public class SignInActivity extends AppCompatActivity {
 
 
 
+
                         mEditEmail.setText("");
                         mEditPassword.setText("");
-                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                        startActivity(intent);
 
+
+                        // Check if SharedPreferences has stored login as true
+
+                        session.setLoggedIn(true);
+
+                        if(session.loggedIn()) {
+                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
 
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(SignInActivity.this, "Authentication failed. Check internet connection",
+                        Toast.makeText(SignInActivity.this, task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
                 }
