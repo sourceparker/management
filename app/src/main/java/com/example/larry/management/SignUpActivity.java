@@ -128,9 +128,6 @@ public class SignUpActivity extends AppCompatActivity {
                         Toast.makeText(SignUpActivity.this, "Sign up success", Toast.LENGTH_SHORT).show();
 
 
-
-
-
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
 
                         //USer id is sent to main activity

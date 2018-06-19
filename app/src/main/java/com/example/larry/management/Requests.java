@@ -47,6 +47,8 @@ public class Requests extends AppCompatActivity {
                key = dataSnapshot.getKey();
                Log.i("keyyyy",key);
 
+               //use key to obtain lotname
+
                 requestsArrayList.add(key);
                 requestsListView.setAdapter(requestsArrayAdapter);
 

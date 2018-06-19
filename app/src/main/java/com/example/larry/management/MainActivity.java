@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId()==R.id.logout){
 
             UserSession session= new UserSession(getApplicationContext());
-            session.setLoggedIn(false);
+            session.removeUser();
+
 
             startActivity(new Intent(this,SignInActivity.class));
         }

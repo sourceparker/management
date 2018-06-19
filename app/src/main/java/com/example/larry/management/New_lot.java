@@ -74,17 +74,13 @@ public class New_lot extends AppCompatActivity {
 
 
 
-            Double latitude= Double.parseDouble(longEditText.getText().toString());
-            Double longitude=Double.parseDouble(latEditText.getText().toString());
+            Double longitude= Double.parseDouble(longEditText.getText().toString());
+            Double latitude=Double.parseDouble(latEditText.getText().toString());
 
             parkingLotDetails.setLotName(lotNameEditText.getText().toString());
             parkingLotDetails.setPhoneNumber(phoneNumberEditText.getText().toString());
             parkingLotDetails.geoLocation(latitude,longitude);
 
-
-            //random number of the lot owner gets mapped to the lot_id
-
-           // parkingLotDetails.checkNum();
 
 
             Toast.makeText(getApplicationContext(),"New Lot saved",Toast.LENGTH_LONG).show();

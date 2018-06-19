@@ -138,28 +138,4 @@ public class Parking_Lot_Details {
 
     }
 
-    //This method maps the Random number of the owner to his lot_id
-
-    public void checkNum() {
-
-        Random rand = new Random();
-        int rand1=rand.nextInt(899)+100;
-        int rand2=rand.nextInt(899)+100;
-
-        setVerNum(String.valueOf(rand1)+"-"+String.valueOf(rand2));
-
-        Log.i("num", getVerNum());
-
-
-
-        databaseReference=mDatabase.getReference("Verification").child("Key Pairs");
-
-        databaseReference.child(getVerNum()).setValue(getLot_id());
-
-    }
-
-
-
-
-
 }

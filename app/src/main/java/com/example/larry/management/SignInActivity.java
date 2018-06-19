@@ -1,6 +1,7 @@
 package com.example.larry.management;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,6 +41,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -50,7 +54,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText mEditPassword;
     private TextView register;
     public User user = new User();
-    private FirebaseDatabase mDatabase;
+    private FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
     FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -62,7 +66,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         session=new UserSession(getApplicationContext());
-
+       mDatabaseReference= mDatabase.getReference();
 
         //make instances of widgets
         mEditEmail = findViewById(R.id.edtmail);
@@ -77,8 +81,11 @@ public class SignInActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+              //  startActivity(intent);klarry@gmail.com
+                register.setTextColor(Color.RED);
+                Toast.makeText(getApplicationContext(),"Sign Up Failed." +
+                        " See support for further details", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -149,8 +156,28 @@ public class SignInActivity extends AppCompatActivity {
                         session.setLoggedIn(true);
 
                         if(session.loggedIn()) {
-                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                            startActivity(intent);
+
+                            //Checks whether the person is registered as a manager
+                            mDatabaseReference.child("isManagement").child(user.getUser_id()).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot.exists()){
+                                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(getApplicationContext(), "You do not have permission to use this app",
+                                                Toast.LENGTH_LONG).show();
+                                        session.removeUser();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+
                         }
 
                     } else {

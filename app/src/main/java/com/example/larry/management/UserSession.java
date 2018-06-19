@@ -21,6 +21,7 @@ public class UserSession {
 
     }
 
+
     public void setLoggedIn(boolean logged){
 
         editor.putBoolean("loggedinmode",logged);
